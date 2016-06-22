@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<style type="text/css">
+:root {
+	font: 14px/20px sans-serif;
+}
+body {
+	text-align: center;
+}
+#connected {
+	display: inline-block;
+	height: 30px;
+	background-color: #ddd;
+	text-align: center;
+	line-height: 30px;
+	color: #fff;
+	font-weight: 600;
+	margin: 0 2px;
+	padding: 0 1em;
+}
+#display {
+	display: inline-block;
+	line-height: 50px;
+}
+.button {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: #ddd;
+	text-align: center;
+	line-height: 30px;
+	margin: 0 2px;
+	color: #fff;
+	font-weight: 600;
+}
+#connected.connected,
+.button.pressed {
+	background-color: #3c3;
+}
+#axisdisplay {
+	text-align: center;
+	line-height: 50px;
+}
+.axis {
+	display: inline-block;
+	height: 30px;
+	background-color: #ddd;
+	text-align: center;
+	line-height: 30px;
+	margin: 0 2px;
+	padding: 0 1em;
+	color: #fff;
+	font-weight: 600;
+}
+</style>
+</head>
+<body>
+<div id="connected">Connected</div><div id="display"></div><div id="axisdisplay"></div>
+<script type="text/javascript">
+
+var connected = document.getElementById('connected');
+var display = document.getElementById('display');
+var axisDisplay = document.getElementById('axisdisplay');
+
+for (var i = 0; i < 32; i++) {
+	var div = document.createElement('div');
+	div.className = 'button';
+	div.textContent = i;
+	display.appendChild(div);
+}
+
+for (var i = 0; i < 10; i++) {
+	var div = document.createElement('div');
+	div.className = 'axis';
+	div.textContent = 'Axis ' + i;
+	axisDisplay.appendChild(div);
+}
+
+function gamepadConnected(aEvent) {
+	console.log(aEvent);
+	connected.classList.add('connected');
+}
+function gamepadDisconnected(aEvent) {
+	console.log(aEvent);
+	connected.classList.remove('connected');
+}
+function buttonDown(aEvent) {
+	console.log(aEvent);
+	display.children[aEvent.button].classList.add('pressed');
+}
+function buttonUp(aEvent) {
+	console.log(aEvent);
+	display.children[aEvent.button].classList.remove('pressed');
+}
+function axisHandler(aEvent) {
+	console.log(aEvent);
+	var colour = aEvent.value < 0 ? '220, 0, 0' : '51, 204, 51';
+	var opacity = Math.abs(aEvent.value);
+
+	axisDisplay.children[aEvent.axis].style.backgroundColor = 'rgba(' + colour + ', ' + opacity + ')';
+}
+ 
+addEventListener('gamepadconnected', gamepadConnected);
+addEventListener('gamepaddisconnected', gamepadDisconnected);
+addEventListener('gamepadbuttondown', buttonDown);
+addEventListener('gamepadbuttonup', buttonUp);
+addEventListener('gamepadaxismove', axisHandler);
+
+</script>
+</body>
+</html>

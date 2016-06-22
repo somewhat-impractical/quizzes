@@ -1,0 +1,113 @@
+:root {
+	background-color: #000;
+	color: #fff;
+	text-align: center;
+	font-family: sans-serif;
+}
+body {
+	width: 1000px;
+	margin: 0 auto;
+}
+button, input {
+	font-size: 18px;
+	padding: 0 3px;
+	text-align: center;
+	vertical-align: middle;
+}
+:-moz-ui-invalid {
+	box-shadow: none;
+}
+audio {
+	vertical-align: middle;
+}
+img {
+	background-color: #333;
+}
+.gamepad {
+	/*display: none;*/
+}
+.connecteddisplay {
+	display: inline-block;
+	height: 30px;
+	background-color: #333;
+	text-align: center;
+	line-height: 30px;
+	color: #000;
+	font-weight: 600;
+	margin: 0 2px;
+	padding: 0 1em;
+}
+.connecteddisplay.connected {
+	background-color: #3c3;
+}
+.buttondisplay {
+	display: inline-block;
+	line-height: 30px;
+}
+.button {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: #333;
+	text-align: center;
+	line-height: 30px;
+	margin: 2px;
+	color: #000;
+	font-weight: 600;
+}
+.button:nth-child(5n + 1).pressed {
+	background-color: #e00;
+	border-color: #e00;
+	color: #333;
+}
+.button:nth-child(5n + 2).pressed {
+	background-color: #fd0;
+	border-color: #fd0;
+	color: #333;
+}
+.button:nth-child(5n + 3).pressed {
+	background-color: #2c0;
+	border-color: #2c0;
+	color: #333;
+}
+.button:nth-child(5n + 4).pressed {
+	background-color: #f70;
+	border-color: #f70;
+	color: #333;
+}
+.button:nth-child(5n).pressed {
+	background-color: #0af;
+	border-color: #0af;
+	color: #333;
+}
+
+.indicator {
+	transition: fill 100ms;
+	fill: #f00;
+}
+.indicator:not(.lit) {
+	fill: #999;
+}
+.indicator.blocked {
+	fill: #333;
+}
+.score {
+	fill: #fff;
+	text-anchor: middle;
+	font-size: 135;
+	font-family: Plump;
+}
+
+#modifyscores {
+	margin: 0 0 2em;
+}
+#modifyscores > div {
+	display: inline-block;
+	width: 180px;
+	padding: 0 1em;
+	box-sizing: border-box;
+}
+#modifyscores > div > input[type="number"] {
+	width: 80px;
+}

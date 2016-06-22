@@ -1,0 +1,42 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/common/style.css" />
+</head>
+<body>
+	<div class="gamepad"><div class="connecteddisplay">Connected</div><div class="buttondisplay"><div class="button">0</div><div class="button">1</div><div class="button">2</div><div class="button">3</div><div class="button">4</div><div class="button">5</div><div class="button">6</div><div class="button">7</div><div class="button">8</div><div class="button">9</div><div class="button">10</div><div class="button">11</div><div class="button">12</div><div class="button">13</div><div class="button">14</div><div class="button">15</div><div class="button">16</div><div class="button">17</div><div class="button">18</div><div class="button">19</div></div></div>
+	<div style="margin: 1em 0;">
+		<button onclick="Game.nextTrack();">Next Track</button>
+		<audio id="audio" controls=""></audio>
+	</div>
+	<div>
+		<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="200" viewBox="0 0 1200 333.333">
+			<g id="indicators">
+				<circle class="indicator" cx="150" cy="100" r="61" />
+				<path class="indicator" d="M393 43h114v114H393z" />
+				<path class="indicator" d="M750 42.172l66.774 115.656H683.226z" />
+				<path class="indicator" d="M1050 36.684l16.29 47.58 50.284.79-40.216 30.194 14.787 48.067L1050 134.398l-41.145 28.917 14.787-48.067-40.216-30.195 50.284-.79z" />
+			</g>
+			<g id="scores">
+				<text class="score" x="150" y="300">0</text>
+				<text class="score" x="450" y="300">0</text>
+				<text class="score" x="750" y="300">0</text>
+				<text class="score" x="1050" y="300">0</text>
+			</g>
+		</svg>
+	</div>
+	<div id="modifyscores">
+		<div><input type="number" step="5" /><button onclick="Game.addScore(0, parseInt(this.previousSibling.value, 10));">Add</button></div
+			><div><input type="number" step="5" /><button onclick="Game.addScore(1, parseInt(this.previousSibling.value, 10));">Add</button></div
+			><div><input type="number" step="5" /><button onclick="Game.addScore(2, parseInt(this.previousSibling.value, 10));">Add</button></div
+			><div><input type="number" step="5" /><button onclick="Game.addScore(3, parseInt(this.previousSibling.value, 10));">Add</button></div>
+	</div>
+	<div id="response" hidden="">
+		<button onclick="Game.response(true);">Correct</button>
+		<button onclick="Game.response(false);">Incorrect</button>
+	</div>
+	<script type="text/javascript" src="/common/control.js"></script>
+	<script type="text/javascript" src="control.js"></script>
+</body>
+</html>
