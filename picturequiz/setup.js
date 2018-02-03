@@ -1,37 +1,48 @@
 /* globals db */
 var WIDTH = 800;
 var HEIGHT = 500;
-var ROWS = 5;
-var COLUMNS = 8;
-var blockout;
+// var ROWS = 5;
+// var COLUMNS = 8;
+// var blockout;
 
 var pictureCanvas = document.getElementById('picture');
 var pictureContext = pictureCanvas.getContext('2d');
-var blockoutCanvas = document.getElementById('blockout');
-var blockoutContext = blockoutCanvas.getContext('2d');
-blockoutCanvas.onclick = function(event) {
-	if (!blockout) {
-		return;
-	}
+var textarea = document.querySelector('textarea');
 
-	var bcr = this.getBoundingClientRect();
-	var row = Math.floor((event.clientY - bcr.top) / 100);
-	var column = Math.floor((event.clientX - bcr.left) / 100);
-	var position = row * COLUMNS + column;
-	var index = blockout.indexOf(position);
-	if (index >= 0) {
-		blockout.splice(index, 1);
-		blockoutContext.clearRect(column * 100, row * 100, 100, 100);
-		if (position % 2) {
-			blockoutContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
-			blockoutContext.fillRect(column * 100, row * 100, 100, 100);
-		}
-	} else {
-		blockout.push(position);
-		blockoutContext.fillStyle = 'rgba(255, 0, 0, 0.25)';
-		blockoutContext.fillRect(column * 100, row * 100, 100, 100);
+var timeout;
+textarea.oninput = function() {
+	if (timeout) {
+		clearTimeout(timeout);
 	}
+	setTimeout(function() {
+		pictureCanvas.setAttribute('style', 'position: absolute; left: 0;' + textarea.value);
+	}, 750);
 };
+// var blockoutCanvas = document.getElementById('blockout');
+// var blockoutContext = blockoutCanvas.getContext('2d');
+// blockoutCanvas.onclick = function(event) {
+// 	if (!blockout) {
+// 		return;
+// 	}
+
+// 	var bcr = this.getBoundingClientRect();
+// 	var row = Math.floor((event.clientY - bcr.top) / 100);
+// 	var column = Math.floor((event.clientX - bcr.left) / 100);
+// 	var position = row * COLUMNS + column;
+// 	var index = blockout.indexOf(position);
+// 	if (index >= 0) {
+// 		blockout.splice(index, 1);
+// 		blockoutContext.clearRect(column * 100, row * 100, 100, 100);
+// 		if (position % 2) {
+// 			blockoutContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
+// 			blockoutContext.fillRect(column * 100, row * 100, 100, 100);
+// 		}
+// 	} else {
+// 		blockout.push(position);
+// 		blockoutContext.fillStyle = 'rgba(255, 0, 0, 0.25)';
+// 		blockoutContext.fillRect(column * 100, row * 100, 100, 100);
+// 	}
+// };
 var input = document.querySelector('input[type="file"]');
 input.onchange = function() {
 	// console.log(this.files[0]);
@@ -61,11 +72,20 @@ document.documentElement.addEventListener('drop', function(event) {
 
 document.querySelector('input[type="button"]').onclick = function() {
 	pictureCanvas.toBlob(function(blob) {
+		var before = {};
+		var after = {};
+		for (let property of textarea.value.split('\n').filter(p => p)) {
+			let [name, value] = property.split(':');
+			before[name] = value.trim();
+			after[name] = 'none';
+		}
+
 		db.transaction('pictures', 'readwrite').objectStore('pictures').add({
 			image: blob,
-			blockout: blockout.sort(function(a, b) {
-				return a - b;
-			})
+			before, after
+			// blockout: blockout.sort(function(a, b) {
+			// 	return a - b;
+			// })
 		}).then(function(pk) {
 			createThumbnail(blob, pk);
 		});
@@ -94,16 +114,16 @@ function loadCanvas(url) {
 			0, 0, this.width, this.height,
 			(WIDTH - newWidth) / 2, (HEIGHT - newHeight) / 2, newWidth, newHeight
 		);
-		blockoutContext.clearRect(0, 0, WIDTH, HEIGHT);
-		blockoutContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
-		for (var i = 0; i < ROWS; i++) {
-			for (var j = 0; j < COLUMNS; j++) {
-				if ((i + j) % 2) {
-					blockoutContext.fillRect(j * 100, i * 100, 100, 100);
-				}
-			}
-		}
-		blockout = [];
+		// blockoutContext.clearRect(0, 0, WIDTH, HEIGHT);
+		// blockoutContext.fillStyle = 'rgba(0, 0, 0, 0.1)';
+		// for (var i = 0; i < ROWS; i++) {
+		// 	for (var j = 0; j < COLUMNS; j++) {
+		// 		if ((i + j) % 2) {
+		// 			blockoutContext.fillRect(j * 100, i * 100, 100, 100);
+		// 		}
+		// 	}
+		// }
+		// blockout = [];
 		URL.revokeObjectURL(this.src);
 	};
 	img.src = url;
@@ -123,6 +143,7 @@ function createThumbnail(blob, pk=0) {
 	existing.insertBefore(img, existing.firstElementChild);
 }
 
+/* exported deleteImage */
 function deleteImage(img) {
 	var pk = parseInt(img.dataset.pk, 10);
 	db.transaction('pictures', 'readwrite').objectStore('pictures').delete(pk).then(function() {

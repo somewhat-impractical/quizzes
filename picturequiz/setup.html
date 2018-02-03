@@ -6,9 +6,12 @@
 </head>
 <body>
 	<div style="text-align: center">
-		<div style="position: relative; width: 800px; height: 500px; margin: 0 auto;">
+		<div style="position: relative; width: 800px; height: 500px; margin: 0 auto; overflow: hidden;">
 			<canvas id="picture" width="800" height="500" style="position: absolute; left: 0;"></canvas>
-			<canvas id="blockout" width="800" height="500" style="position: absolute; left: 0;"></canvas>
+			<!-- <canvas id="blockout" width="800" height="500" style="position: absolute; left: 0;"></canvas> -->
+		</div>
+		<div>
+			<textarea rows="3" style="width: 50%; box-sizing: border-box"></textarea>
 		</div>
 		<input type="file" accept="image/*" />
 		<input type="button" value="Save" />
@@ -18,7 +21,7 @@
 			<img width="200" height="125" onload="window.URL.revokeObjectURL(this.src);" ondblclick="deleteImage(this);" />
 		</template>
 	</div>
-<script type="text/javascript" src="idb.js"></script>
 <script type="text/javascript" src="setup.js"></script>
+<script type="text/javascript" src="idb.js"></script>
 </body>
 </html>

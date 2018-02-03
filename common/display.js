@@ -8,9 +8,10 @@ var GameDisplay = {
 
 	init: function() {
 		this.loadScores();
-		navigator.serviceWorker.register('/service-worker.js');
-		navigator.serviceWorker.addEventListener('message', this);
-		this.broadcaster = navigator.serviceWorker.controller;
+		navigator.serviceWorker.register('/service-worker.js').then(() => {
+			navigator.serviceWorker.addEventListener('message', this);
+			this.broadcaster = navigator.serviceWorker.controller;
+		});
 	},
 	handleEvent: function(message) {
 		console.log(message.data);

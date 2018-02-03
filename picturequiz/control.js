@@ -67,10 +67,12 @@ Game.startNextImage = function() {
 		console.log('Image is ' + url);
 
 		Game.currentImageDisplay.src = url;
-		Game.broadcaster.postMessage({
+		Game.postMessage({
 			action: 'startImage',
 			src: url,
-			blockout: image.blockout
+			// blockout: image.blockout
+			before: image.before,
+			after: image.after
 		});
 		Game.paused = false;
 		Game.nextButton.hidden = true;
@@ -82,6 +84,28 @@ Game.startNextImage = function() {
 		}
 		return db.transaction('pictures').objectStore('pictures').get(Game.pictures[Game.pictureIndex + 1]);
 	}).then(function(image) {
+		if (!image) {
+			return;
+		}
+
+		var url = URL.createObjectURL(image.image);
+		Game.nextImageDisplay.src = url;
+	});
+};
+Game.skipNextImage = function() {
+	if (++this.pictureIndex >= this.pictures.length) {
+		Game.currentImageDisplay.src = blankImageURL;
+		Game.nextButton.hidden = true;
+		console.log('End of game');
+		return;
+	}
+
+	if (Game.pictureIndex + 1 >= Game.pictures.length) {
+		Game.nextImageDisplay.src = blankImageURL;
+		return;
+	}
+
+	db.transaction('pictures').objectStore('pictures').get(Game.pictures[Game.pictureIndex + 1]).then(function(image) {
 		if (!image) {
 			return;
 		}

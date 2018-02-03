@@ -89,7 +89,7 @@ function nextFill() {
 		timeout = setTimeout(nextFill, 400);
 	} catch (ex) {
 		if (ex instanceof StopIteration) {
-			GameDisplay.broadcaster.postMessage({
+			GameDisplay.postMessage({
 				action: 'stop'
 			});
 		} else {
