@@ -1,0 +1,52 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Control</title>
+  <link rel="stylesheet" href="common.css"/>
+  <link rel="stylesheet" href="control.css"/>
+</head>
+<body>
+  <div id="display"></div>
+  <div id="controllers">
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+    <control-buzz-controller></control-buzz-controller>
+  </div>
+  <div id="quiz">
+    <button id="start">Start</button>
+    <button id="yes" disabled="disabled">Yes</button>
+    <button id="no" disabled="disabled">No</button>
+  </div>
+  <div id="multi" style="--x: 10vw">
+    <button id="multi-4" class="squarebutton" style="background-color: var(--blue)" disabled="disabled"></button>
+    <button id="multi-3" class="squarebutton" style="background-color: var(--orange)" disabled="disabled"></button>
+    <button id="multi-2" class="squarebutton" style="background-color: var(--green)" disabled="disabled"></button>
+    <button id="multi-1" class="squarebutton" style="background-color: var(--yellow)" disabled="disabled"></button>
+  </div>
+  <template id="buzz-controller-template">
+    <div class="roundbutton red"></div>
+    <div class="squarebutton blue"></div>
+    <div class="squarebutton orange"></div>
+    <div class="squarebutton green"></div>
+    <div class="squarebutton yellow"></div>
+    <input inputmode="numeric" class="score" />
+    <div class="scoreadjust">
+      <button>-1</button>
+      <button>+1</button>
+      <button>-10</button>
+      <button>+10</button>
+      <button>-20</button>
+      <button>+20</button>
+      <button>-50</button>
+      <button>+50</button>
+    </div>
+  </template>
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="control.js"></script>
+</body>
+</html>

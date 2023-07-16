@@ -1,0 +1,51 @@
+:root {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  --x: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#image {
+  text-align: center;
+}
+
+img, canvas {
+  width: 100vh;
+  height: 75vh;
+}
+
+#game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#controllers {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+buzz-controller {
+  width: calc(var(--x) * 1.1);
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  flex: 1;
+}
+
+.roundbutton {
+  margin: calc(var(--x) / 20);
+}
+
+.score {
+  flex: 1;
+  font-size: calc(var(--x) / 3);
+}

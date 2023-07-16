@@ -1,0 +1,67 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+.button {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #333;
+  text-align: center;
+  line-height: 40px;
+  margin: 2px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.button.pressed:nth-child(5n + 1) {
+  background-color: var(--red);
+}
+.button.pressed:nth-child(5n) {
+  background-color: var(--blue);
+}
+.button.pressed:nth-child(5n + 4) {
+  background-color: var(--orange);
+}
+.button.pressed:nth-child(5n + 3) {
+  background-color: var(--green);
+}
+.button.pressed:nth-child(5n + 2) {
+  background-color: var(--yellow);
+}
+
+#controllers {
+  display: flex;
+  justify-content: center;
+  --x: 6vw;
+}
+.score {
+  font-size: calc(var(--x) / 3);
+  text-align: center;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+.scoreadjust {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(var(--x) / 25);
+}
+.scoreadjust button {
+  appearance: none;
+  flex: 1;
+  font-size: calc(var(--x) / 5);
+}
+.scoreadjust button:nth-child(2n + 1) {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+.scoreadjust button:nth-child(2n) {
+  background-color: var(--green);
+  border-color: var(--green);
+}
+#quiz button, #multi button {
+  font-size: 2vw;
+}

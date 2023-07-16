@@ -1,0 +1,32 @@
+:root {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  --x: 10vw;
+}
+
+#game {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+buzz-controller {
+  width: calc(var(--x) * 1.1);
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.roundbutton {
+  margin: calc(var(--x) / 20);
+}
+
+.score {
+  flex: 1;
+  font-size: calc(var(--x) / 3);
+}

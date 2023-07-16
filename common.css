@@ -1,0 +1,71 @@
+body {
+  --red: #ff0000;
+  --blue: #0092d4;
+  --orange: #ff6c00;
+  --green: #00c336;
+  --yellow: #fff538;
+  background-color: #000;
+  color: #fff;
+}
+buzz-controller,
+control-buzz-controller {
+  display: flex;
+  flex-direction: column;
+  margin: calc(var(--x) / 15);
+  gap: calc(var(--x) / 15);
+  text-align: center;
+  width: var(--x);
+  overflow-x: hidden;
+}
+.red {
+  --colour: var(--red);
+}
+.blue {
+  --colour: var(--blue);
+}
+.orange {
+  --colour: var(--orange);
+}
+.green {
+  --colour: var(--green);
+}
+.yellow {
+  --colour: var(--yellow);
+}
+.lithidden {
+  --colour: white;
+}
+.roundbutton {
+  width: var(--x);
+  height: var(--x);
+  border-radius: 100%;
+  outline: calc(var(--x) / 40) solid #333;
+  outline-offset: calc(var(--x) / -40);
+  line-height: var(--x);
+  font-size: calc(var(--x) / 1.666);
+}
+.squarebutton {
+  width: var(--x);
+  height: calc(var(--x) / 3.5);
+  border-radius: calc(var(--x) / 20);
+  outline: calc(var(--x) / 40) solid #333;
+  outline-offset: calc(var(--x) / -40);
+  line-height: calc(var(--x) / 4);
+  font-size: calc(var(--x) / 7);
+}
+.lit, .lithidden {
+  background-color: var(--colour);
+  outline-color: var(--colour);
+}
+.outline {
+  background-image: radial-gradient(transparent 40%, var(--colour));
+  box-shadow: 0 0 calc(var(--x) / 20) var(--colour);
+  outline-color: var(--colour);
+}
+.score {
+  font-family: "plump";
+}
+.scoresize {
+  width: 1000px;
+  transition: width 500ms;
+}
